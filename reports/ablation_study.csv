@@ -1,0 +1,4 @@
+Configuration,Feature Count,Reg Test MSE,Reg Test RMSE,Reg Test R2,Clf Accuracy,Clf F1-Score,Clf ROC-AUC
+Full Baseline (All Features),30,85.42,9.24,0.3431,0.9333,0.9645,0.6429
+Without GMP (no gmp_last_day),29,129.59,11.38,0.0033,0.8933,0.9437,0.5011
+Without Mood & Clusters,24,85.43,9.24,0.3429,0.9333,0.9645,0.6408
