@@ -1,14 +1,8 @@
-task,model,AUC,Accuracy,F1,MSE,Macro_F1,Macro_Precision,Macro_Recall,Precision,R2,RMSE,Recall
-Classification,AdaBoost_Classifier,0.7437,0.9067,0.951,,,,,,,,
-Classification,GradientBoosting_Classifier,0.7111,0.9333,0.9645,,,,,,,,
-Classification,LogisticRegression,0.7164,0.88,0.9362,,,,,0.9041,,,0.9706
-Classification,SVM_linear,,0.56,,,0.3944,0.3782,0.4127,,,,
-Classification,kNN_Classifier,,0.92,0.9577,,,,,,,,
-Regression,GradientBoosting_Regressor,,,,85.4523,,,,,0.3428,9.244,
-Regression,LinearRegression_Multi,,,,108.9521,,,,,0.1621,10.438,
-Regression,LinearRegression_Simple,,,,122.4535,,,,,0.0582,11.0659,
-Regression,PolynomialRegression_Deg1,,,,104.3879,,,,,,10.217,
-Regression,PolynomialRegression_Deg2,,,,137.8738,,,,,,11.742,
-Regression,PolynomialRegression_Deg3,,,,119.2076,,,,,,10.9182,
-Regression,PolynomialRegression_Deg4,,,,538.3045,,,,,,23.2014,
-Regression,kNN_Regressor,,,,118.1047,,,,,0.0917,10.8676,
+Model,Type,Train_MSE,Test_MSE,Test_RMSE,Test_MAE,Test_R2,Accuracy,Precision,Recall,F1,AUC
+LinearRegression,Regressor,177.42,317.8,17.83,14.53,0.4611,,,,,
+RidgeRegression,Regressor,196.4,219.17,14.8,10.92,0.6283,,,,,
+GradientBoostingRegressor,Regressor,47.92,251.99,15.87,12.83,0.5727,,,,,
+LogisticRegression,Classifier,,,,,,0.5556,0.5556,1.0,0.7143,0.8
+GradientBoostingClassifier,Classifier,,,,,,0.4444,0.5,0.8,0.6154,0.55
+kNN_Classifier,Classifier,,,,,,0.5556,0.5556,1.0,0.7143,0.525
+SVM_Verdict,Classifier (Multi-class),,,,,,0.4444,,,,

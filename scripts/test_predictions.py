@@ -1,7 +1,7 @@
 """
 test_predictions.py
 -------------------
-Automated test script verifying predict_ipo() on 3 real unseen IPOs from test.csv.
+Automated test script verifying predict_ipo() on real unseen IPOs from test.csv.
 """
 
 import sys
@@ -14,19 +14,20 @@ if PROJECT_ROOT not in sys.path:
 import pandas as pd
 from src.predict import predict_ipo
 
+
 def run_tests():
     test_path = os.path.join(PROJECT_ROOT, "data", "processed", "test.csv")
     test_df = pd.read_csv(test_path)
 
-    # 3 distinct target IPOs covering Apply, Neutral, and Avoid regimes
+    # Real target IPOs covering Apply, Neutral, and Avoid regimes
     test_names = [
-        "Navbharat Consumer Care Ltd", # Actual Apply (+15.96%)
-        "Synergy Diagnostics Ltd",      # Actual Neutral (+2.89%)
-        "Innova Diagnostics Ltd",       # Actual Avoid (-4.29%)
+        "Orient Cables (India) Limited",  # Actual Apply (+48.9%)
+        "Shah Investor's Home Limited",   # Actual Neutral (+4.1%)
+        "AceVector Limited",              # Actual Avoid (-18.5%)
     ]
 
     print("=" * 75)
-    print("VERIFYING PREDICTIONS ON 3 TEST SET IPOS")
+    print("VERIFYING PREDICTIONS ON REAL TEST SET IPOS")
     print("=" * 75)
 
     all_passed = True
@@ -46,8 +47,9 @@ def run_tests():
         print(f"\nEvaluating: '{name}'")
         print(f"  Sector                : {raw_dict.get('sector')}")
         print(f"  Listing Date          : {raw_dict.get('listing_date')}")
-        print(f"  Total Subscription    : {raw_dict.get('total_sub'):.2f}x")
+        print(f"  Issue Price           : INR {raw_dict.get('issue_price')}")
         print(f"  Grey Market Premium   : INR {raw_dict.get('gmp_last_day')}")
+        print(f"  GMP Implied Gain      : {raw_dict.get('gmp_implied_gain_pct'):+.2f}%")
         print(f"  Actual Debut Gain     : {actual_gain:+.2f}%")
         print(f"  Actual Verdict        : {actual_verdict}")
 
@@ -55,7 +57,7 @@ def run_tests():
         res = predict_ipo(raw_dict)
 
         print("  --- Model Inferences ---")
-        print(f"  Market Mood (HMM)     : {res['market_mood']}")
+        print(f"  Market Mood           : {res['market_mood']}")
         print(f"  Archetype Cluster     : {res['cluster_id']} - {res['cluster_name']}")
         print(f"  Expected Listing Gain : {res['expected_gain_pct']:+.2f}% (Error: {res['expected_gain_pct'] - actual_gain:+.2f}%)")
         print(f"  Positive Debut Prob   : {res['positive_listing_prob'] * 100:.1f}%")
@@ -64,7 +66,7 @@ def run_tests():
         peers = res["similar_ipos"]
         print(f"  Top 5 Peers Retrieved : {len(peers)} peers found")
         for idx, peer in peers.iterrows():
-            print(f"    - {peer['ipo_name']} ({peer['sector']}) | Sub: {peer['total_sub']}x | Debut: {peer['listing_gain_pct']:+.2f}% | Sim: {peer['similarity_score']:.4f}")
+            print(f"    - {peer['ipo_name']} ({peer['sector']}) | Debut: {peer['listing_gain_pct']:+.2f}% | Sim: {peer['similarity_score']:.4f}")
 
         # Verification checks
         assert isinstance(res["expected_gain_pct"], float), "Expected gain must be a float"
@@ -75,10 +77,11 @@ def run_tests():
 
     print("\n" + "=" * 75)
     if all_passed:
-        print("[SUCCESS] All 3 test IPOs passed validation checks with zero errors.")
+        print("[SUCCESS] All real test IPOs passed validation checks with zero errors.")
     else:
         print("[FAILURE] Some tests encountered issues.")
     print("=" * 75)
+
 
 if __name__ == "__main__":
     run_tests()

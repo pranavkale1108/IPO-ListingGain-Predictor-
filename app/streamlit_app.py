@@ -214,83 +214,76 @@ def get_reference_data():
 
 test_df, mood_df, metrics_df, ablation_df = get_reference_data()
 
-# Pre-defined test cases for 1-click evaluation
+# Pre-defined real-market test cases for 1-click evaluation
 PRESET_CASES = {
     "Custom Manual Input": None,
-    "Test Case 1 (Apply): Navbharat Consumer Care Ltd (+15.96% actual gain)": {
-        "ipo_name": "Navbharat Consumer Care Ltd",
-        "listing_date": "2024-01-19",
-        "sector": "Chemicals",
-        "issue_size_cr": 2711.8,
-        "price_band_upper": 105.13,
-        "issue_price": 105.13,
-        "qib_sub": 44.14,
-        "nii_sub": 10.47,
-        "retail_sub": 17.77,
-        "total_sub": 29.86,
-        "gmp_last_day": 35.77,
-        "fresh_issue_pct": 43.49,
-        "ofs_pct": 56.51,
-        "revenue_growth_pct": 47.08,
-        "profit_growth_pct": 20.20,
-        "pe_vs_peers": 1.44,
-        "nifty_7d_trend_pct": -0.04,
-        "actual_gain": 15.96,
+    "Test Case 1 (Apply): Orient Cables (India) Ltd (+48.9% actual debut)": {
+        "ipo_name": "Orient Cables (India) Limited",
+        "listing_date": "2026-10-05",
+        "sector": "Manufacturing",
+        "issue_size_cr": 272.0,
+        "price_band_upper": 272.0,
+        "issue_price": 272.0,
+        "gmp_last_day": 107.0,
+        "gmp_implied_gain_pct": 39.3,
+        "fresh_issue_pct": 100.0,
+        "ofs_pct": 0.0,
+        "actual_gain": 48.9,
         "actual_verdict": "Apply",
     },
-    "Test Case 2 (Neutral): Synergy Diagnostics Ltd (+2.89% actual gain)": {
-        "ipo_name": "Synergy Diagnostics Ltd",
-        "listing_date": "2024-01-10",
-        "sector": "Consumer Goods",
-        "issue_size_cr": 727.45,
-        "price_band_upper": 172.38,
-        "issue_price": 172.38,
-        "qib_sub": 5.40,
-        "nii_sub": 30.59,
-        "retail_sub": 8.12,
-        "total_sub": 10.13,
-        "gmp_last_day": 3.23,
-        "fresh_issue_pct": 62.31,
-        "ofs_pct": 37.69,
-        "revenue_growth_pct": 3.81,
-        "profit_growth_pct": 12.00,
-        "pe_vs_peers": 1.04,
-        "nifty_7d_trend_pct": -1.42,
-        "actual_gain": 2.89,
+    "Test Case 2 (Neutral): Shah Investor's Home Ltd (+4.1% actual debut)": {
+        "ipo_name": "Shah Investor's Home Limited",
+        "listing_date": "2026-10-06",
+        "sector": "Financial Services",
+        "issue_size_cr": 167.0,
+        "price_band_upper": 167.0,
+        "issue_price": 167.0,
+        "gmp_last_day": 12.0,
+        "gmp_implied_gain_pct": 7.2,
+        "fresh_issue_pct": 100.0,
+        "ofs_pct": 0.0,
+        "actual_gain": 4.1,
         "actual_verdict": "Neutral",
     },
-    "Test Case 3 (Avoid): Innova Diagnostics Ltd (-4.29% actual gain)": {
-        "ipo_name": "Innova Diagnostics Ltd",
-        "listing_date": "2024-01-21",
-        "sector": "Chemicals",
-        "issue_size_cr": 786.86,
-        "price_band_upper": 389.89,
-        "issue_price": 389.89,
-        "qib_sub": 7.69,
-        "nii_sub": 69.04,
-        "retail_sub": 12.23,
-        "total_sub": 18.48,
-        "gmp_last_day": -37.14,
-        "fresh_issue_pct": 16.47,
-        "ofs_pct": 83.53,
-        "revenue_growth_pct": 42.55,
-        "profit_growth_pct": 41.78,
-        "pe_vs_peers": 1.31,
-        "nifty_7d_trend_pct": 4.11,
-        "actual_gain": -4.29,
+    "Test Case 3 (Avoid): AceVector Ltd (-18.5% actual debut discount)": {
+        "ipo_name": "AceVector Limited",
+        "listing_date": "2026-10-05",
+        "sector": "Technology",
+        "issue_size_cr": 32.0,
+        "price_band_upper": 32.0,
+        "issue_price": 32.0,
+        "gmp_last_day": 1.0,
+        "gmp_implied_gain_pct": 3.1,
+        "fresh_issue_pct": 100.0,
+        "ofs_pct": 0.0,
+        "actual_gain": -18.5,
         "actual_verdict": "Avoid",
+    },
+    "Test Case 4 (Neutral): A-One Steels India Ltd (+2.9% actual debut)": {
+        "ipo_name": "A-One Steels India Limited",
+        "listing_date": "2026-10-01",
+        "sector": "Manufacturing",
+        "issue_size_cr": 405.0,
+        "price_band_upper": 405.0,
+        "issue_price": 405.0,
+        "gmp_last_day": 47.0,
+        "gmp_implied_gain_pct": 11.6,
+        "fresh_issue_pct": 100.0,
+        "ofs_pct": 0.0,
+        "actual_gain": 2.9,
+        "actual_verdict": "Neutral",
     },
 }
 
 # ---------------------------------------------------------
 # Sidebar: IPO Input Form & Preset Selector
 # ---------------------------------------------------------
-st.sidebar.header("🛠️ IPO Input Configuration")
+st.sidebar.header("🛠️ Real IPO Input Configuration")
 
 selected_preset = st.sidebar.selectbox(
     "📂 Quick-Load Test Set IPO:",
     options=list(PRESET_CASES.keys()),
-    index=1,  # Default to Test Case 1
+    index=1,  # Default to Orient Cables
     help="Select a real unseen test IPO to automatically populate parameters, or choose Custom to manually test any IPO.",
 )
 
